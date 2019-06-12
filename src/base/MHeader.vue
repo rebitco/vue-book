@@ -6,20 +6,20 @@
 </template>
 
 <script>
-    export default {
-        name: "MHeader",
-      props: {
-        back: {
-          type: Boolean,
-          default: false
-        },
-      },
-      methods: {
-        goback() {
-          this.$router.go(-1);
-        }
-      },
+export default {
+  name: 'MHeader',
+  props: {
+    back: {
+      type: Boolean,
+      default: false
     }
+  },
+  methods: {
+    goback () {
+      this.$router.go(-1)
+    }
+  }
+}
 </script>
 
 <style scoped lang="less">

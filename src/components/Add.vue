@@ -20,6 +20,12 @@
             <input type="text" id="bookCover" v-model="book.bookCover">
           </li>
           <li>
+            <label for="bookCover">数 量</label>
+            <button @click="setCount(count+1)">+</button>
+            <span>{{count}}</span>
+            <button @click="setCount(count-1)">-</button>
+          </li>
+          <li>
             <button @click="addNewBook">添 加</button>
           </li>
         </ul>
@@ -28,26 +34,33 @@
 </template>
 
 <script>
-  import MHeader from '../base/MHeader.vue';
-  import {addBook} from '../api/index.js';
+import MHeader from '../base/MHeader.vue'
+import {addBook} from '../api/index.js'
+import { store, mutations } from '../store/store' // Vue2.6新增API Observable
 
-    export default {
-        name: "Add",
-      data() {
-          return {
-            book: {},
-          };
-      },
-      components: {
-        MHeader
-      },
-      methods: {
-          async addNewBook() {
-            await addBook(this.book);
-            this.$router.push('/list');
-          },
-      },
+export default {
+  name: 'Add',
+  data () {
+    return {
+      book: {}
     }
+  },
+  computed: {
+    count () {
+      return store.count
+    }
+  },
+  components: {
+    MHeader
+  },
+  methods: {
+    async addNewBook () {
+      await addBook(this.book)
+      this.$router.push('/list')
+    },
+    setCount: mutations.setCount
+  }
+}
 </script>
 
 <style scoped>
